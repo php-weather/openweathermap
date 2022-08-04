@@ -1,0 +1,46 @@
+{
+  "coord": {
+    "lon": 8.0044,
+    "lat": 47.8739
+  },
+  "weather": [
+    {
+      "id": 800,
+      "main": "Clear",
+      "description": "clear sky",
+      "icon": "01n"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 20.03,
+    "feels_like": 19.45,
+    "temp_min": 19.49,
+    "temp_max": 24.22,
+    "pressure": 1014,
+    "humidity": 52,
+    "sea_level": 1014,
+    "grnd_level": 857
+  },
+  "visibility": 10000,
+  "wind": {
+    "speed": 1.48,
+    "deg": 91,
+    "gust": 1.82
+  },
+  "clouds": {
+    "all": 5
+  },
+  "dt": 1659640527,
+  "sys": {
+    "type": 2,
+    "id": 2038422,
+    "country": "DE",
+    "sunrise": 1659586089,
+    "sunset": 1659639599
+  },
+  "timezone": 7200,
+  "id": 2959324,
+  "name": "Aftersteg",
+  "cod": 200
+}
