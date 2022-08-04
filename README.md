@@ -1,4 +1,4 @@
-# PHP Weather Provider for Bright Sky
+# PHP Weather Provider for OpenWeatherMap
 
 ![Packagist Version](https://img.shields.io/packagist/v/php-weather/openweathermap)  
 ![PHP Weather Common Version](https://img.shields.io/badge/phpweather--common-0.3.*-brightgreen)
