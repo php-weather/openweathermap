@@ -198,7 +198,7 @@ class OpenWeatherMap extends AbstractHttpProvider
             is_array($rawData['clouds']) &&
             array_key_exists('all', $rawData['clouds'])
         ) {
-            $weather->setCloudCover($rawData['clouds']['all'] / 100);
+            $weather->setCloudCover($rawData['clouds']['all']);
         }
 
         if (array_key_exists('pop', $rawData)) {
