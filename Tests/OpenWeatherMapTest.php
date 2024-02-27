@@ -5,13 +5,15 @@ namespace PhpWeather\Provider\OpenWeatherMap;
 
 use DateTime;
 use DateTimeZone;
-use PHPUnit\Framework\TestCase;
 use Http\Client\HttpClient;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use PhpWeather\Common\WeatherQuery;
+use PhpWeather\Exception;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamInterface;
 
 class OpenWeatherMapTest extends TestCase
 {
@@ -29,6 +31,9 @@ class OpenWeatherMapTest extends TestCase
         $this->provider = new OpenWeatherMap($this->client, $this->key, $this->requestFactory);
     }
 
+    /**
+     * @throws Exception
+     */
     public function testCurrentWeather(): void
     {
         $latitude = 47.8739259;
@@ -41,8 +46,10 @@ class OpenWeatherMapTest extends TestCase
         $this->requestFactory->expects(self::once())->method('createRequest')->with('GET', $testString)->willReturn($request);
 
         $responseBodyString = file_get_contents(__DIR__.'/resources/currentWeather.json');
+        $body = $this->createMock(StreamInterface::class);
+        $body->method('__toString')->willReturn($responseBodyString);
         $response = $this->createMock(ResponseInterface::class);
-        $response->expects(self::once())->method('getBody')->willReturn($responseBodyString);
+        $response->expects(self::once())->method('getBody')->willReturn($body);
         $this->client->expects(self::once())->method('sendRequest')->with($request)->willReturn($response);
 
         $currentWeather = $this->provider->getCurrentWeather($testQuery);

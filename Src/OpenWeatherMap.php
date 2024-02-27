@@ -32,6 +32,26 @@ class OpenWeatherMap extends AbstractHttpProvider
         parent::__construct($client, $requestFactory);
     }
 
+    /**
+     * @param  WeatherQuery  $query
+     * @return Weather
+     * @throws Throwable
+     */
+    public function getHistorical(WeatherQuery $query): Weather
+    {
+        throw new NoWeatherData();
+    }
+
+    /**
+     * @param  WeatherQuery  $query
+     * @return WeatherCollection
+     * @throws Throwable
+     */
+    public function getHistoricalTimeLine(WeatherQuery $query): WeatherCollection
+    {
+        throw new NoWeatherData();
+    }
+
     protected function getCurrentWeatherQueryString(WeatherQuery $query): string
     {
         return sprintf(
@@ -52,26 +72,6 @@ class OpenWeatherMap extends AbstractHttpProvider
             $this->key,
             Unit::METRIC
         );
-    }
-
-    /**
-     * @param  WeatherQuery  $query
-     * @return Weather
-     * @throws Throwable
-     */
-    public function getHistorical(WeatherQuery $query): Weather
-    {
-        throw new NoWeatherData();
-    }
-
-    /**
-     * @param  WeatherQuery  $query
-     * @return WeatherCollection
-     * @throws Throwable
-     */
-    public function getHistoricalTimeLine(WeatherQuery $query): WeatherCollection
-    {
-        throw new NoWeatherData();
     }
 
     /**
@@ -198,7 +198,7 @@ class OpenWeatherMap extends AbstractHttpProvider
             is_array($rawData['clouds']) &&
             array_key_exists('all', $rawData['clouds'])
         ) {
-            $weather->setCloudCover($rawData['clouds']['all']);
+            $weather->setCloudCover($rawData['clouds']['all'] / 100);
         }
 
         if (array_key_exists('pop', $rawData)) {
